@@ -51,31 +51,31 @@ $(DISAS) : $(ELF)
 	$(OBJDUMP) -d -C $< > $@
 
 $(BIN) : $(ELF)
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(OBJCOPY) -O binary $< $@
 
 $(ELF) : $(OBJECTS) $(LDSCRIPT)
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	${LD} -o $@ $(OBJECTS) -T$(LDSCRIPT) $(LDFLAGS)
 
 $(S_OBJECTS) : $(BUILDDIR)%.o : %.s
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(C_OBJECTS) : $(BUILDDIR)%.o : %.c
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(CXX_OBJECTS) : $(BUILDDIR)%.o : %.cc
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(C_DEP) : $(BUILDDIR)%.dep : %.c
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(CC) -M -MM -MF $@ $< -MT $(patsubst %.dep,%.o,$@) $(CFLAGS)
 
 $(CXX_DEP) : $(BUILDDIR)%.dep : %.cc
-	@ mkdir -p $(dir $@)
+	@ sh -c "mkdir -p $(dir $@)"
 	$(CXX) -M -MM -MF $@ $< -MT $(patsubst %.dep,%.o,$@) $(CXXFLAGS)
 
 -include $(DEP)
