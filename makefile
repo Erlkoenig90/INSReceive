@@ -11,8 +11,8 @@ ifndef TGMEM
 TGMEM=FLASH
 endif
 
-INCLUDES=Inc Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Inc
-DEFINES=STM32F407xx USE_FULL_ASSERT
+INCLUDES=Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include
+DEFINES=STM32F407xx
 IFLAGS=$(foreach dir,$(INCLUDES),-I$(dir))
 DFLAGS=$(foreach dir,$(DEFINES),-D$(dir))
 PF_FLAGS=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
